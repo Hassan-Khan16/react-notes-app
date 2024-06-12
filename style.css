@@ -20,12 +20,20 @@ button:focus {
 
 .pane {
     overflow-y: auto;
-    /* padding: 10px; */
+    padding-block: 10px;
+    background-color: #0a0c10;
 }
 
 .sidebar {
     width: 20%;
     height: 100vh;
+    background-color: #0a0c10;
+    color: white;
+    direction: rtl;
+}
+
+.sidebar * {
+    direction: ltr;
 }
 
 /* .sidebar--note {
@@ -34,31 +42,53 @@ button:focus {
 
 .sidebar--header {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
+    padding-inline: 2vh 1vh;
+    gap: 2vh;
+    margin-top: 10px;
+    margin-bottom: 28px;
 }
 
 .sidebar--header>h3 {
     font-size: 1.75rem;
+    margin: 0px;
 }
 
 .new-note {
     cursor: pointer;
-    background-color: #4A4E74;
+    background-color: white;
     border: none;
-    color: white;
-    border-radius: 3px;
+    color: #0a0c10;
+    border-radius: 10px;
     height: 30px;
     width: 30px;
+    transition: background-color 0.2s ease;
 }
 
-.first-note {
+.new-note:hover {
+    background-color: rgb(226, 226, 226);
+}
+
+.first-note-button {
     cursor: pointer;
-    background-color: #4A4E74;
+    background-color: white;
     border: none;
-    color: white;
-    border-radius: 3px;
+    color: #0a0c10;
+    border-radius: 25px;
     padding: 1rem;
+    font-weight: bold;
+}
+
+.no-notes {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #0a0c10;
+    color: white;
 }
 
 .editor {
@@ -73,13 +103,18 @@ button:focus {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    transition: background-color 0.2s ease;
+    border-radius: 10px;
 }
 
 .title--delete {
     display: none;
     cursor: pointer;
-    background-color: transparent;
     border: none;
+}
+
+.title:not(.selected-note):hover {
+    background-color: #272b33;
 }
 
 .title:hover .title--delete {
@@ -91,28 +126,32 @@ button:focus {
 }
 
 .text-snippet {
-    padding-inline: 5px;
+    padding-inline: 2vh;
     font-size: 0.8rem;
-    font-weight: 400;
+    font-weight: 600;
     line-height: 1.2rem;
-    color: #4A4E74;
+    color: white;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 .selected-note {
-    background-color: #4A4E74;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.selected-note:hover .delete-btn {
+    color: black;
 }
 
 .selected-note .text-snippet {
-    color: white;
+    color: #0a0c10;
     font-weight: 700;
 }
 
 .gutter {
-    background-color: #eee;
-
+    background-color: #0a0c10;
     background-repeat: no-repeat;
     background-position: 50%;
 }
@@ -129,17 +168,8 @@ button:focus {
     display: flex;
 }
 
-.no-notes {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: whitesmoke;
-}
-
 .delete-btn {
+    color: white;
     display: none;
     background: none;
     border: none;
@@ -167,7 +197,8 @@ button:focus {
         inset 2px 0 0;
     border-bottom-left-radius: 1px;
     border-bottom-right-radius: 1px;
-    margin-top: 4px
+    margin-top: 4px;
+    margin-right: 2vh;
 }
 
 .gg-trash::after,
@@ -197,3 +228,56 @@ button:focus {
     top: -7px;
     left: -2px
 }
+
+.react-mde {
+    border: none;
+}
+
+.mde-header {
+    padding: 5px 10px;
+    background-color: #bbbbc4;
+    border: none;
+}
+
+.mde-tabs>button {
+    border-radius: 10px !important;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+
+.mde-tabs>button.selected {
+    border: none !important;
+    background-color: #919198 !important;
+}
+
+.mde-tabs>button:hover {
+    background-color: #a4a4ac !important;
+}
+
+.mde-header-group>li {
+    transition: background-color 0.2s ease;
+}
+
+.mde-header-group>li:hover {
+    background-color: #a4a4ac;
+}
+
+.mde-text {
+    padding: 20px !important;
+    background-color: #272b33;
+    color: white;
+}
+
+textarea:focus {
+    outline: none;
+}
+
+/* 
+
+* {
+    scrollbar-width: thin;
+}
+
+* {
+    scrollbar-color: #686868 #272b33;
+} */

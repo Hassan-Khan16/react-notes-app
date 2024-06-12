@@ -9,7 +9,17 @@ export default function App() {
   const [tempNoteText, setTempNoteText] = React.useState("")
   const [notes, setNotes] = React.useState([])
   const [currentNoteId, setCurrentNoteId] = React.useState("")
+  const [darkMode, setDarkMode] = React.useState(() => {
+    return JSON.parse(localStorage.getItem("darkMode")) ?? true
+  })
 
+  function toggle() {
+    setDarkMode(prevDarkMode => {
+      const newDarkMode = !prevDarkMode
+      localStorage.setItem("darkMode", JSON.stringify(newDarkMode))
+      return newDarkMode
+    })
+  }
   const currentNote =
     notes.find(note => note.id === currentNoteId)
     || notes[0]
@@ -67,7 +77,7 @@ export default function App() {
   }
 
   return (
-    <main>
+    <main data-theme={darkMode ? "dark" : "light"}>
       {
         notes.length > 0
           ?
@@ -82,11 +92,14 @@ export default function App() {
               setCurrentNoteId={setCurrentNoteId}
               newNote={createNewNote}
               deleteNote={deleteNote}
+              darkMode={darkMode}
+              toggle={toggle}
             />
             {
               <Editor
                 tempNoteText={tempNoteText}
                 setTempNoteText={setTempNoteText}
+                darkMode={darkMode}
               />
             }
           </Split>

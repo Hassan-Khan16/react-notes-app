@@ -4,7 +4,6 @@ export default function Sidebar(props) {
     const noteElements = props.notes.map((note, index) => (
         <div key={note.id}>
             <div
-
                 className={`title ${note.id === props.currentNote.id ? "selected-note" : ""
                     }`}
                 onClick={() => props.setCurrentNoteId(note.id)}
@@ -18,6 +17,7 @@ export default function Sidebar(props) {
                 </button>
             </div>
         </div>
+
     ))
 
     return (
@@ -26,7 +26,16 @@ export default function Sidebar(props) {
                 <h3>Notes</h3>
                 <button className="new-note" onClick={props.newNote}>+</button>
             </div>
+
             {noteElements}
+
+            <div className="toggler">
+                <p className="toggler--light">Light</p>
+                <div className="toggler--slider" onClick={props.toggle}>
+                    <div className="toggler--slider--circle"></div>
+                </div>
+                <p className="toggler--dark">Dark</p>
+            </div>
         </section>
     )
 }

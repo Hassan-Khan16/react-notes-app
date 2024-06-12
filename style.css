@@ -1,5 +1,27 @@
+:root {
+    --bgcolor: white;
+    --textcolor: #0a0c10;
+    --bg-light-hover: rgb(59, 59, 59);
+    --bg-dark-hover: #e2e2e2;
+    --mde-header-bg: white;
+    --mde-tabs-selected: #919198;
+    --mde-tabs-hover: #a4a4ac;
+}
+
+[data-theme="dark"] {
+    --bgcolor: #0a0c10;
+    --textcolor: white;
+    --bg-light-hover: rgb(226, 226, 226);
+    --bg-dark-hover: #272b33;
+    --mde-header-bg: #bbbbc4;
+    --mde-tabs-selected: #919198;
+    --mde-tabs-hover: #a4a4ac;
+}
+
+
 * {
     box-sizing: border-box;
+    transition: all 0.2s ease;
 }
 
 body {
@@ -21,14 +43,19 @@ button:focus {
 .pane {
     overflow-y: auto;
     padding-block: 10px;
-    background-color: #0a0c10;
+    background-color: var(--bgcolor);
 }
+
+/* 
+main.dark>.split>.pane {
+    background-color: var(--black);
+} */
 
 .sidebar {
     width: 20%;
     height: 100vh;
-    background-color: #0a0c10;
-    color: white;
+    background-color: var(--bgcolor);
+    color: var(--textcolor);
     direction: rtl;
 }
 
@@ -57,9 +84,9 @@ button:focus {
 
 .new-note {
     cursor: pointer;
-    background-color: white;
+    background-color: var(--textcolor);
     border: none;
-    color: #0a0c10;
+    color: var(--bgcolor);
     border-radius: 10px;
     height: 30px;
     width: 30px;
@@ -67,14 +94,14 @@ button:focus {
 }
 
 .new-note:hover {
-    background-color: rgb(226, 226, 226);
+    background-color: var(--bg-light-hover);
 }
 
 .first-note-button {
     cursor: pointer;
-    background-color: white;
+    background-color: var(--textcolor);
     border: none;
-    color: #0a0c10;
+    color: var(--bgcolor);
     border-radius: 25px;
     padding: 1rem;
     font-weight: bold;
@@ -87,8 +114,8 @@ button:focus {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #0a0c10;
-    color: white;
+    background-color: var(--bgcolor);
+    color: var(--textcolor);
 }
 
 .editor {
@@ -114,7 +141,7 @@ button:focus {
 }
 
 .title:not(.selected-note):hover {
-    background-color: #272b33;
+    background-color: var(--bg-dark-hover);
 }
 
 .title:hover .title--delete {
@@ -130,14 +157,14 @@ button:focus {
     font-size: 0.8rem;
     font-weight: 600;
     line-height: 1.2rem;
-    color: white;
+    color: var(--textcolor);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 .selected-note {
-    background-color: white;
+    background-color: var(--textcolor);
     border-radius: 10px;
 }
 
@@ -146,12 +173,12 @@ button:focus {
 }
 
 .selected-note .text-snippet {
-    color: #0a0c10;
+    color: var(--bgcolor);
     font-weight: 700;
 }
 
 .gutter {
-    background-color: #0a0c10;
+    background-color: var(--bgcolor);
     background-repeat: no-repeat;
     background-position: 50%;
 }
@@ -169,7 +196,7 @@ button:focus {
 }
 
 .delete-btn {
-    color: white;
+    color: var(--textcolor);
     display: none;
     background: none;
     border: none;
@@ -235,7 +262,7 @@ button:focus {
 
 .mde-header {
     padding: 5px 10px;
-    background-color: #bbbbc4;
+    background-color: var(--mde-header-bg);
     border: none;
 }
 
@@ -247,11 +274,11 @@ button:focus {
 
 .mde-tabs>button.selected {
     border: none !important;
-    background-color: #919198 !important;
+    background-color: var(--mde-tabs-selected) !important;
 }
 
 .mde-tabs>button:hover {
-    background-color: #a4a4ac !important;
+    background-color: var(--mde-tabs-hover) !important;
 }
 
 .mde-header-group>li {
@@ -259,17 +286,76 @@ button:focus {
 }
 
 .mde-header-group>li:hover {
-    background-color: #a4a4ac;
+    background-color: var(--mde-tabs-hover);
 }
 
 .mde-text {
     padding: 20px !important;
-    background-color: #272b33;
-    color: white;
+    background-color: var(--bg-dark-hover);
+    color: var(--textcolor);
 }
 
 textarea:focus {
     outline: none;
+}
+
+/* LIGHT/DARK TOGGLER CODE */
+
+.toggler {
+    display: flex;
+    align-items: center;
+}
+
+.toggler p {
+    font-size: 0.625rem;
+    font-weight: 600;
+}
+
+.toggler--slider {
+    width: 25px;
+    height: 13px;
+    background-color: #2B283A;
+    border-radius: 2rem;
+    margin-inline: 7px;
+    cursor: pointer;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border: 1px solid black;
+    box-sizing: content-box;
+}
+
+.toggler--slider--circle {
+    height: 13px;
+    width: 13px;
+    background-color: white;
+    border-radius: 50%;
+}
+
+[data-theme="dark"] .toggler--slider {
+    justify-content: flex-end;
+    background-color: #F5F5F5;
+    border-color: white;
+}
+
+[data-theme="dark"] .toggler--slider--circle {
+    background-color: black;
+}
+
+.toggler--light {
+    color: #2B283A;
+}
+
+[data-theme="dark"] .toggler--light {
+    color: #918E9B;
+}
+
+.toggler--dark {
+    color: #6b6b6b;
+}
+
+[data-theme="dark"] .toggler--dark {
+    color: white;
 }
 
 /* 

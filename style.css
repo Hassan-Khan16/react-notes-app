@@ -370,6 +370,16 @@ textarea:focus {
 
 .toggle-sidebar {
     display: none;
+    background-color: var(--textcolor);
+    color: var(--bgcolor);
+    border-radius: 10px;
+    height: 30px;
+    width: 30px;
+}
+
+.toggle-sidebar svg {
+    width: 24px;
+    height: 24px;
 }
 
 @media (max-width: 768px) {
@@ -382,13 +392,7 @@ textarea:focus {
     }
 
     .toggle-sidebar {
-        display: inline-block;
-        background-color: var(--textcolor);
-        border: none;
-        color: var(--bgcolor);
-        border-radius: 10px;
-        padding: 5px 10px;
-        cursor: pointer;
+        display: flex;
     }
 
     .sidebar--body {

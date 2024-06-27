@@ -52,8 +52,7 @@ main.dark>.split>.pane {
 } */
 
 .sidebar {
-    width: 20%;
-    height: 100vh;
+    max-width: 25%;
     background-color: var(--bgcolor);
     color: var(--textcolor);
     direction: rtl;
@@ -73,14 +72,15 @@ main.dark>.split>.pane {
     align-items: center;
     padding-inline: 2vh 1vh;
     gap: 2vh;
-    margin-top: 10px;
-    margin-bottom: 28px;
+    margin-block: 10px;
 }
 
 .sidebar--header>h3 {
     font-size: 1.75rem;
     margin: 0px;
 }
+
+.sidebar--body {}
 
 .new-note {
     cursor: pointer;
@@ -169,7 +169,7 @@ main.dark>.split>.pane {
 }
 
 .selected-note:hover .delete-btn {
-    color: black;
+    color: var(--bgcolor);
 }
 
 .selected-note .text-snippet {
@@ -367,3 +367,40 @@ textarea:focus {
 * {
     scrollbar-color: #686868 #272b33;
 } */
+
+.toggle-sidebar {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .pane {
+        padding-block: 0px;
+    }
+
+    .sidebar {
+        max-width: 100%;
+    }
+
+    .toggle-sidebar {
+        display: inline-block;
+        background-color: var(--textcolor);
+        border: none;
+        color: var(--bgcolor);
+        border-radius: 10px;
+        padding: 5px 10px;
+        cursor: pointer;
+    }
+
+    .sidebar--body {
+        display: none;
+    }
+
+    .sidebar--body.visible {
+        display: block;
+    }
+
+    .split {
+        display: flex;
+        flex-direction: column;
+    }
+}

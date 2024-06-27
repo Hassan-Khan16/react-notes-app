@@ -1,6 +1,8 @@
-import React from "react"
+import React, { useState } from "react";
 
 export default function Sidebar(props) {
+    const [isSidebarBodyVisible, setIsSidebarBodyVisible] = useState(false);
+
     const noteElements = props.notes.map((note, index) => (
         <div key={note.id}>
             <div
@@ -17,25 +19,33 @@ export default function Sidebar(props) {
                 </button>
             </div>
         </div>
+    ));
 
-    ))
+    const toggleSidebarBody = () => {
+        setIsSidebarBodyVisible(!isSidebarBodyVisible);
+    };
 
     return (
         <section className="pane sidebar">
             <div className="sidebar--header">
+                <button className="toggle-sidebar" onClick={toggleSidebarBody}>
+                    {isSidebarBodyVisible ? "Hide" : "Show"}
+                </button>
                 <h3>Notes</h3>
                 <button className="new-note" onClick={props.newNote}>+</button>
             </div>
 
-            {noteElements}
+            <div className={`sidebar--body ${isSidebarBodyVisible ? "visible" : ""}`}>
+                {noteElements}
 
-            <div className="toggler">
-                <p className="toggler--light">Light</p>
-                <div className="toggler--slider" onClick={props.toggle}>
-                    <div className="toggler--slider--circle"></div>
+                <div className="toggler">
+                    <p className="toggler--light">Light</p>
+                    <div className="toggler--slider" onClick={props.toggle}>
+                        <div className="toggler--slider--circle"></div>
+                    </div>
+                    <p className="toggler--dark">Dark</p>
                 </div>
-                <p className="toggler--dark">Dark</p>
             </div>
         </section>
-    )
+    );
 }
